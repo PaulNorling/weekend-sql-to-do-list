@@ -34,4 +34,19 @@ router.get('/', (req,res) => {
         });
 });
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    console.log('delete router id:', id);
+    const queryText = `DELETE FROM "list" WHERE "id" = $1;`;
+    pool.query(queryText, [id])
+        .then(() => {
+            console.log('Task delete success!')
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log(`Error in delete query: ${queryText}, error ${error}`);
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;

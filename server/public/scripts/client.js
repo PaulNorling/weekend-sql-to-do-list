@@ -5,12 +5,15 @@ $(onReady);
 function onReady() {
     getTasks();
     console.log('JQ')
-    clickListen();
+    //clickListen();
+    $('#addTask').on('click', postTask);
+    $('#taskList').on('click', '.delete-btn', deleteTask);
 }
 
-function clickListen() {
-    $('#addTask').on('click', postTask);
-}
+// function clickListen() {
+//     $('#addTask').on('click', postTask);
+//     $('#taskList').on('click', '.delete-btn', deleteTask);
+// }
 
 function postTask() {
     let newTask = {
@@ -23,12 +26,14 @@ function postTask() {
         data: newTask
     }).then(function (response) {
         console.log('posting')
+        getTasks();
     }).catch(function(error) {
         alert(`failure ${error}`)
     });
 }
 
 function getTasks() {
+    $('#taskList').empty();
     $.ajax({
         type: 'GET',
         url: '/tasks'
@@ -40,6 +45,9 @@ function getTasks() {
             <tr>
                 <td>${response[i].task}</td>
                 <td>${response[i].complete}</td>
+                <td>
+                <button class="delete-btn" data-id="${response[i].id}">Delete</button>
+                </td>
             </tr>
             `)
         }
@@ -48,4 +56,17 @@ function getTasks() {
     })
 }
 
-function deleteTask()
+function deleteTask() {
+    const taskId = $(this).data('id');
+    console.log('taskId:', taskId);
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${taskId}`
+    })
+    .then(function() {
+        getTasks();
+    }) 
+    .catch(function(error) {
+        alert(`delete function ${error}`);
+    });
+}
