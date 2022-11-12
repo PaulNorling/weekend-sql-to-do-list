@@ -8,13 +8,8 @@ function onReady() {
     //clickListen();
     $('#addTask').on('click', postTask);
     $('#taskList').on('click', '.delete-btn', deleteTask);
-    $('#taskList').on('click', '.update-btn', markTast);
+    $('#taskList').on('click', '.update-btn', markTask);
 }
-
-// function clickListen() {
-//     $('#addTask').on('click', postTask);
-//     $('#taskList').on('click', '.delete-btn', deleteTask);
-// }
 
 function postTask() {
     let newTask = {
@@ -26,7 +21,7 @@ function postTask() {
         url: '/tasks',
         data: newTask
     }).then(function (response) {
-        console.log('posting')
+        console.log('posting', response)
         $('#taskDescription').val('');
         getTasks();
     }).catch(function(error) {
@@ -44,14 +39,15 @@ function getTasks() {
         //append to DOM
         for ( let i =0; i < response.length; i++) {
             $('#taskList').append(`
-            <tr>
+            <tr class="
+                ${(response[i].complete) ? 'completed' : 'incomplete'}
+            ">
                 <td>${response[i].task}</td>
-                <td>${response[i].complete}</td>
                 <td>
-                    <button class="delete-btn" data-id="${response[i].id}">Delete</button>
+                    <button class="update-btn" data-id="${response[i].id}">Complete</button>
                 </td>
                 <td>
-                    <button class="update-btn" data-id="${response[i].id}">Done?</button>
+                    <button class="delete-btn" data-id="${response[i].id}">Delete</button>
                 </td>
             </tr>
             `)
@@ -76,7 +72,7 @@ function deleteTask() {
     });
 }
 
-function markTast() {
+function markTask() {
     const id = $(this).data('id');
 
     $.ajax({
@@ -90,3 +86,5 @@ function markTast() {
         alert('no good!', error);
     })
 }
+
+{/* <td>${response[i].complete}</td> */}
