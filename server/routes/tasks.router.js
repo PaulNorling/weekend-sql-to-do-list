@@ -21,5 +21,17 @@ router.post('/', (req, res) => {
     });
 })
 
+router.get('/', (req,res) => {
+    let queryText = 'SELECT * FROM "list";';
+    pool.query(queryText)
+        .then((result) => {
+            console.log('result.rows:', result.rows)
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Query error: ${queryText}, error: ${error}`);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;

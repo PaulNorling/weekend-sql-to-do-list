@@ -10,14 +10,22 @@
     <title>Document</title>
 </head>
 <body>
-<header>
-    <h1>To Do List</h1>
-</header>
-<section>
-    <input id="taskDescription" type="text">
-    <input id="taskComplete" type="text">
-    <button id="addTask" type="submit">Add Task</button>
-</section>
-    
+    <header>
+        <h1>To Do List</h1>
+    </header>
+    <section>
+        <input id="taskDescription" type="text">
+        <!-- <input id="taskComplete" type="text"> -->
+        <button id="addTask" type="submit">Add Task</button>
+    </section>
+    <table>
+        <thead>
+            <tr>
+                <th>Tasks</th>
+                <th>Complete</th>
+            </tr>
+        </thead>
+        <tbody id="taskList"></tbody>
+    </table>
 </body>
 </html>
