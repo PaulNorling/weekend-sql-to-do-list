@@ -13,7 +13,8 @@ function clickListen() {
 
 function postTask() {
     let newTask = {
-       task: $('#taskDescription').val()
+       task: $('#taskDescription').val(),
+       complete: $('#taskComplete').val()
     }
     $.ajax({
         type: 'POST',
