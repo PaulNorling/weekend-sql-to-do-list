@@ -1,4 +1,5 @@
 const express = require('express');
+const { Pool } = require('pg');
 const router = express.Router();
 const pool = require('../modules/pool')
 
@@ -47,6 +48,20 @@ router.delete('/:id', (req, res) => {
             console.log(`Error in delete query: ${queryText}, error ${error}`);
             res.sendStatus(500);
         })
+});
+
+router.put('/:id', (req, res) => {
+    console.log('in put router', req);
+    const taskId = req.params.id;
+    const queryText = `UPDATE "list" SET "complete" = NOT complete WHERE ID=$1`
+    pool.query(queryText, [taskId])
+        .then(() => {
+            console.log('It worked!');
+            res.sendStatus(200);
+        }).catch((error) => {
+            console.log('Error in put router', queryText, error);
+            res.sendStatus(500);
+        });
 });
 
 module.exports = router;

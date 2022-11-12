@@ -8,6 +8,7 @@ function onReady() {
     //clickListen();
     $('#addTask').on('click', postTask);
     $('#taskList').on('click', '.delete-btn', deleteTask);
+    $('#taskList').on('click', '.update-btn', markTast);
 }
 
 // function clickListen() {
@@ -26,6 +27,7 @@ function postTask() {
         data: newTask
     }).then(function (response) {
         console.log('posting')
+        $('#taskDescription').val('');
         getTasks();
     }).catch(function(error) {
         alert(`failure ${error}`)
@@ -46,7 +48,10 @@ function getTasks() {
                 <td>${response[i].task}</td>
                 <td>${response[i].complete}</td>
                 <td>
-                <button class="delete-btn" data-id="${response[i].id}">Delete</button>
+                    <button class="delete-btn" data-id="${response[i].id}">Delete</button>
+                </td>
+                <td>
+                    <button class="update-btn" data-id="${response[i].id}">Done?</button>
                 </td>
             </tr>
             `)
@@ -69,4 +74,19 @@ function deleteTask() {
     .catch(function(error) {
         alert(`delete function ${error}`);
     });
+}
+
+function markTast() {
+    const id = $(this).data('id');
+
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${id}`
+    })
+    .then(function() {
+        getTasks();
+    })
+    .catch(function(error) {
+        alert('no good!', error);
+    })
 }
