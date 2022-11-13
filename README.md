@@ -1,7 +1,5 @@
 # Full Stack To Do List
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
-
 ## Description
 
 Full Stack To Do List is a a web app for managinging a list of task for a specific project.
