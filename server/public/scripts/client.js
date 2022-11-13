@@ -5,7 +5,6 @@ $(onReady);
 function onReady() {
     getTasks();
     console.log('JQ')
-    //clickListen();
     $('#addTask').on('click', postTask);
     $('#taskList').on('click', '.delete-btn', deleteTask);
     $('#taskList').on('click', '.update-btn', markTask);
@@ -74,7 +73,6 @@ function deleteTask() {
 
 function markTask() {
     const id = $(this).data('id');
-
     $.ajax({
         method: 'PUT',
         url: `/tasks/${id}`
@@ -87,4 +85,3 @@ function markTask() {
     })
 }
 
-{/* <td>${response[i].complete}</td> */}
