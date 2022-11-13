@@ -1,16 +1,15 @@
 const pg = require('pg');
 const Pool = pg.Pool;
 const pool = new Pool({
-    database: 'weekend-to-do-app', // name of db; this can change!
-    host: 'localhost', // where is your db?
-    port: 5432, // default for Postgres
-    max: 10, // max queries at one time
-    idleTimeoutMillis: 30000 // 30 seconds to try to connect, otherwise cancel query
+    database: 'weekend-to-do-app', // name of db
+    host: 'localhost', // db location
+    port: 5432, 
+    max: 10, 
+    idleTimeoutMillis: 30000 
 });
 
-// not required but useful for debugging
 pool.on('connect', () => {
-    console.log('PostgreSQL is connected! Shoutout Node');
+    console.log('PostgreSQL is connected');
 });
 
 pool.on('error', (error) => {

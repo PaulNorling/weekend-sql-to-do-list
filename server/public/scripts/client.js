@@ -4,12 +4,18 @@ $(onReady);
 
 function onReady() {
     getTasks();
-    console.log('JQ')
+    console.log('JQ');
+    clickListeners();
+}
+
+//buton click listeners
+function clickListeners() {
     $('#addTask').on('click', postTask);
     $('#taskList').on('click', '.delete-btn', deleteTask);
     $('#taskList').on('click', '.update-btn', markTask);
 }
 
+//post task
 function postTask() {
     let newTask = {
        task: $('#taskDescription').val(),
@@ -28,6 +34,7 @@ function postTask() {
     });
 }
 
+//get tasks
 function getTasks() {
     $('#taskList').empty();
     $.ajax({
@@ -56,6 +63,7 @@ function getTasks() {
     })
 }
 
+//delete task
 function deleteTask() {
     const taskId = $(this).data('id');
     console.log('taskId:', taskId);
@@ -71,6 +79,7 @@ function deleteTask() {
     });
 }
 
+//mark task as complete
 function markTask() {
     const id = $(this).data('id');
     $.ajax({
