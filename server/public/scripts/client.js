@@ -93,4 +93,3 @@ function markTask() {
         alert('no good!', error);
     })
 }
-
