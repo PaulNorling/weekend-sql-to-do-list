@@ -19,7 +19,7 @@ function clickListeners() {
 function postTask() {
     let newTask = {
        task: $('#taskDescription').val(),
-       complete: false  //only temporary unless it works
+       complete: false  
     }
     $.ajax({
         type: 'POST',
