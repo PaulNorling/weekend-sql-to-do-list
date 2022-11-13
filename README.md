@@ -18,7 +18,7 @@ You need:
 
 ## Installation
 
-1. Create the database.
+1. Create a database named 'weekend-to-do-app' in PostgreSQL.
 2. The database.sql file has a query set up to be copy pasted and run in the database.
 3. Visit localhost:5000 in browser.
 4. To add a task fill out the task description input and press add task.

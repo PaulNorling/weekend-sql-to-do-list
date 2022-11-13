@@ -1,9 +1,11 @@
 const express = require('express');
 const { Pool } = require('pg');
 const router = express.Router();
+
+//db connection
 const pool = require('../modules/pool')
 
-
+//post tasks
 router.post('/', (req, res) => {
     console.log(req.body)
     const newTask = req.body;
@@ -22,6 +24,7 @@ router.post('/', (req, res) => {
         });
 });
 
+//get tasks
 router.get('/', (req,res) => {
     let queryText = 'SELECT * FROM "list" ORDER BY "id" desc;';
     pool.query(queryText)
@@ -35,6 +38,7 @@ router.get('/', (req,res) => {
         });
 });
 
+//delete task
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
     console.log('delete router id:', id);
@@ -50,6 +54,7 @@ router.delete('/:id', (req, res) => {
         })
 });
 
+//update status
 router.put('/:id', (req, res) => {
     console.log('in put router', req);
     const taskId = req.params.id;
